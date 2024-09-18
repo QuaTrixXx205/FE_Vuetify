@@ -31,6 +31,11 @@
                   <v-list-item-title>Chủ đề</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
+              <v-list-item to="" @click="logOut" v-if="isAuthenticated">
+                <v-list-item-content>
+                  <v-list-item-title>Log Out</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
           </v-list>
         </v-navigation-drawer>
@@ -51,7 +56,23 @@ export default {
   components: {},
 
   data: () => ({
-    drawer: false
+    drawer: false,
+    isAuthenticated: !!localStorage.getItem("auth")
   }),
+  methods: {
+    logOut() {
+      // Xóa token auth khỏi localStorage
+      localStorage.removeItem("auth");
+      this.isAuthenticated = false;
+      // Điều hướng về trang login
+      this.$router.push("/login");
+    },
+  },
+  watch: {
+    // Theo dõi thay đổi của route để cập nhật trạng thái đăng nhập
+    $route() {
+      this.isAuthenticated = !!localStorage.getItem("auth");
+    },
+  },
 }
 </script>

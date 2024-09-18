@@ -3,7 +3,7 @@
         <div class="text-center mb-2"><b>Đăng nhập hệ thống</b></div>
         <v-form>
             <v-text-field v-model="userName" label="Tên đăng nhập"></v-text-field>
-            <v-text-field v-model="userPass" label="Mật khẩu"></v-text-field>
+            <v-text-field v-model="userPass" label="Mật khẩu" type="password"></v-text-field>
             <v-btn class="mt-2" block @click="userLogin()" color="primary" elevation="0">Đăng nhập</v-btn>
         </v-form>
         <div v-if="loginError != ''" class="text-center mt-4 mb-2 error--text">{{ loginError }}</div>
